@@ -23,10 +23,10 @@
 </head>
 <body>
 
-    <h2>MiniApp с лобби</h2>
+    <h2>Простейший MiniApp</h2>
 
     <video id="video" controls>
-        <source src="myvideo.mp4" type="video/mp4">
+        <source src="https://kinogo.host/35683-uiti-krasivo-2017.html" type="video/mp4">
         Ваш браузер не поддерживает видео.
     </video>
     <br>
@@ -36,27 +36,11 @@
         const video = document.getElementById("video");
         const btn = document.getElementById("playPauseBtn");
 
-        // Запрашиваем имя лобби у пользователя
-        let lobbyName = prompt("Введите имя лобби (любое) для совместного просмотра:");
-
-        // Подключаемся к WebSocket серверу
-        const ws = new WebSocket(`ws://localhost:8000/ws/${lobbyName}`);
-
-        // Получаем события от сервера
-        ws.onmessage = (event) => {
-            const action = event.data;
-            if (action === "play") video.play();
-            if (action === "pause") video.pause();
-        };
-
-        // Кнопка Play/Pause
         btn.addEventListener("click", () => {
             if (video.paused) {
                 video.play();
-                ws.send("play");
             } else {
                 video.pause();
-                ws.send("pause");
             }
         });
     </script>
